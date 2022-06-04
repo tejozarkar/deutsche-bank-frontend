@@ -13,6 +13,7 @@ const Blog = ({ blog, loading, onPublish, showApproval }) => {
                <small>Created By: </small>
                {blog.username}
             </p>
+            <small>Created By: </small>
             <Moment format="DD MMM YYYY">{blog.createdAt}</Moment>
          </div>
          {showApproval && <Button onClick={() => onPublish(blog.id)}>Publish</Button>}
