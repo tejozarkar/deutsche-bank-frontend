@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "https://deutschebackend.herokuapp.com",
+  "engines": {
+    "node": "15.14.0"
+  },
   "dependencies": {
     "@ant-design/dark-theme": "^2.0.2",
     "@ant-design/icons": "^4.7.0",
