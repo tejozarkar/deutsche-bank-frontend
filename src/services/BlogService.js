@@ -1,5 +1,5 @@
 export async function getBlogs() {
-   const response = await fetch(`/blog`, {
+   const response = await fetch(`https://deutschebackend.herokuapp.com/blog`, {
       method: "GET",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("jwt-token")}` },
    });
@@ -7,7 +7,7 @@ export async function getBlogs() {
 }
 
 export async function getBlogHistory(id) {
-   const response = await fetch(`/blog/history/${id}`, {
+   const response = await fetch(`https://deutschebackend.herokuapp.com/blog/history/${id}`, {
       method: "GET",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("jwt-token")}` },
    });
@@ -15,7 +15,7 @@ export async function getBlogHistory(id) {
 }
 
 export async function deleteBlog(id) {
-   const response = await fetch(`/blog/${id}`, {
+   const response = await fetch(`https://deutschebackend.herokuapp.com/blog/${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("jwt-token")}` },
    });
@@ -23,7 +23,7 @@ export async function deleteBlog(id) {
 }
 
 export async function getMyBlogs() {
-   const response = await fetch(`/blog/me`, {
+   const response = await fetch(`https://deutschebackend.herokuapp.com/blog/me`, {
       method: "GET",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("jwt-token")}` },
    });
@@ -31,7 +31,7 @@ export async function getMyBlogs() {
 }
 
 export async function getUnderReviewBlogs() {
-   const response = await fetch(`/blog/status/under_review`, {
+   const response = await fetch(`https://deutschebackend.herokuapp.com/blog/status/under_review`, {
       method: "GET",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("jwt-token")}` },
    });
@@ -39,7 +39,7 @@ export async function getUnderReviewBlogs() {
 }
 
 export async function getBlog(id) {
-   const response = await fetch(`/blog/details/${id}`, {
+   const response = await fetch(`https://deutschebackend.herokuapp.com/blog/details/${id}`, {
       method: "GET",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("jwt-token")}` },
    });
@@ -47,7 +47,7 @@ export async function getBlog(id) {
 }
 
 export async function create(content) {
-   const response = await fetch("/blog", {
+   const response = await fetch("https://deutschebackend.herokuapp.com/blog", {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("jwt-token")}` },
       body: JSON.stringify(content),
@@ -56,7 +56,7 @@ export async function create(content) {
 }
 
 export async function edit(content) {
-   const response = await fetch("/blog/edit", {
+   const response = await fetch("https://deutschebackend.herokuapp.com/blog/edit", {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("jwt-token")}` },
       body: JSON.stringify(content),
@@ -65,7 +65,7 @@ export async function edit(content) {
 }
 
 export async function publish(id) {
-   const response = await fetch(`/blog/status/published/${id}`, {
+   const response = await fetch(`https://deutschebackend.herokuapp.com/blog/status/published/${id}`, {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("jwt-token")}` },
    });

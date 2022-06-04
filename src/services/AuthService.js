@@ -1,5 +1,5 @@
 export async function getSecurityQuestion(username) {
-   const response = await fetch(`/users/security-question/${username}`, {
+   const response = await fetch(`https://deutschebackend.herokuapp.com/users/security-question/${username}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
    });
@@ -7,7 +7,7 @@ export async function getSecurityQuestion(username) {
 }
 
 export async function getMyDetails() {
-   const response = await fetch(`/users/me`, {
+   const response = await fetch(`https://deutschebackend.herokuapp.com/users/me`, {
       method: "GET",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("jwt-token")}` },
    });
@@ -15,7 +15,7 @@ export async function getMyDetails() {
 }
 
 export async function login(content) {
-   const response = await fetch("/users/authenticate", {
+   const response = await fetch("https://deutschebackend.herokuapp.com/users/authenticate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(content),
@@ -24,7 +24,7 @@ export async function login(content) {
 }
 
 export async function signup(content) {
-   const response = await fetch("/users/register", {
+   const response = await fetch("https://deutschebackend.herokuapp.com/users/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(content),
