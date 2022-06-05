@@ -1,4 +1,4 @@
-import { ArrowLeftOutlined, DeleteOutlined, EditOutlined, ExclamationCircleOutlined, HistoryOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined, ExclamationCircleOutlined, HistoryOutlined } from "@ant-design/icons";
 import { Avatar, Button, Col, message, Row } from "antd";
 import confirm from "antd/lib/modal/confirm";
 import React, { useEffect, useState } from "react";
@@ -80,22 +80,22 @@ const BlogDetails = () => {
                      <label className="label">Last modified at: </label> <Moment format="DD MMM YYYY">{blog.modified}</Moment>
                   </div>
                   <div className="gapper">
-                     <label className="label">Actions: </label>
-                     {role &&
-                        (role.name === "ADMIN" ||
-                           (role.name === "SUPER_ADMIN" && (
-                              <div className="sequential-buttons">
-                                 <Button type="success" icon={<EditOutlined />} onClick={onEditClick}>
-                                    Edit
-                                 </Button>
-                                 <Button type="dashed" danger icon={<HistoryOutlined />} onClick={onHistoryClick}>
-                                    History
-                                 </Button>
-                                 <Button type="danger" icon={<DeleteOutlined />} onClick={onDeleteClick}>
-                                    Delete
-                                 </Button>
-                              </div>
-                           )))}
+                     {role && (role.name === "ADMIN" || role.name === "SUPER_ADMIN") && (
+                        <>
+                           <label className="label">Actions: </label>
+                           <div className="sequential-buttons">
+                              <Button type="success" icon={<EditOutlined />} onClick={onEditClick}>
+                                 Edit
+                              </Button>
+                              <Button type="dashed" danger icon={<HistoryOutlined />} onClick={onHistoryClick}>
+                                 History
+                              </Button>
+                              <Button type="danger" icon={<DeleteOutlined />} onClick={onDeleteClick}>
+                                 Delete
+                              </Button>
+                           </div>
+                        </>
+                     )}
                   </div>
                </div>
             </Col>

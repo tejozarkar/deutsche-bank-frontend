@@ -28,6 +28,7 @@ const Signup = () => {
                      required: true,
                      message: "Please input your username!",
                   },
+                  { max: 255, message: "Max 255 characters allowed." },
                ]}>
                <Input />
             </Form.Item>
@@ -40,6 +41,7 @@ const Signup = () => {
                      required: true,
                      message: "Please input your password!",
                   },
+                  { max: 255, message: "Max 255 characters allowed." },
                ]}
                hasFeedback>
                <Input.Password />
@@ -55,6 +57,7 @@ const Signup = () => {
                      required: true,
                      message: "Please confirm your password!",
                   },
+                  { max: 255, message: "Max 255 characters allowed." },
                   ({ getFieldValue }) => ({
                      validator(_, value) {
                         if (!value || getFieldValue("password") === value) {
@@ -80,6 +83,7 @@ const Signup = () => {
                      required: true,
                      message: "Please input your E-mail!",
                   },
+                  { max: 255, message: "Max 255 characters allowed." },
                ]}>
                <Input />
             </Form.Item>
@@ -92,6 +96,7 @@ const Signup = () => {
                      required: true,
                      message: "Please input your name!",
                   },
+                  { max: 255, message: "Max 255 characters allowed." },
                ]}>
                <Input
                   style={{
@@ -127,6 +132,7 @@ const Signup = () => {
                      required: true,
                      message: "Please input security answer!",
                   },
+                  { max: 255, message: "Max 255 characters allowed." },
                ]}>
                <Input />
             </Form.Item>

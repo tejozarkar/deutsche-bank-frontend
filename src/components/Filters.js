@@ -26,6 +26,7 @@ const Filters = ({ blogs, setFilteredBlogs, setSortByAuthor, setSortByDate }) =>
             setSortByAuthor(false);
             setSortByDate(false);
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [sortBy]);
 
    return (

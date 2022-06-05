@@ -22,10 +22,10 @@ const Create = () => {
          <BackButton />
          <div className="background-wrap">
             <Form form={form} layout="vertical" onFinish={onFormSubmit} initialValues={{ requiredMarkValue: "Required" }}>
-               <Form.Item label="Title" name="title" required>
+               <Form.Item label="Title" name="title" required rules={[{ max: 255, message: "Max 255 characters allowed." }]}>
                   <Input placeholder="Enter title" />
                </Form.Item>
-               <Form.Item label="Description" name="description" required>
+               <Form.Item label="Description" name="description" required rules={[{ max: 255, message: "Max 255 characters allowed." }]}>
                   <Input placeholder="Enter description" />
                </Form.Item>
                <Form.Item
