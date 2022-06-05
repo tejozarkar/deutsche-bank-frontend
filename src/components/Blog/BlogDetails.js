@@ -1,8 +1,13 @@
-import { Button, message } from "antd";
+import { ArrowLeftOutlined, DeleteOutlined, EditOutlined, ExclamationCircleOutlined, HistoryOutlined } from "@ant-design/icons";
+import { Avatar, Button, Col, message, Row } from "antd";
+import confirm from "antd/lib/modal/confirm";
 import React, { useEffect, useState } from "react";
+import Moment from "react-moment";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { deleteBlog, getBlog } from "../../services/BlogService";
+import BackButton from "../BackButton";
+import "./../../styles/BlogDetails.scss";
 
 const BlogDetails = () => {
    const { id } = useParams();
@@ -23,34 +28,78 @@ const BlogDetails = () => {
    };
 
    const onDeleteClick = () => {
-      deleteBlog(id).then(() => {
-         message.info("Blog deleted");
-         navigate(-1);
+      confirm({
+         title: "Do you Want to delete this blog?",
+         icon: <ExclamationCircleOutlined style={{ color: "red" }} />,
+
+         onOk() {
+            deleteBlog(id).then(() => {
+               message.info("Blog deleted");
+               navigate(-1);
+            });
+         },
+         onCancel() {
+            console.log("Cancel");
+         },
       });
    };
 
    return (
-      <div>
-         {role &&
-            (role.name === "ADMIN" ||
-               (role.name === "SUPER_ADMIN" && (
-                  <div>
-                     <Button type="success" onClick={onEditClick}>
-                        Edit
-                     </Button>
-                     <Button type="danger" onClick={onDeleteClick}>
-                        Delete
-                     </Button>
-                     <Button type="success" onClick={onHistoryClick}>
-                        History
-                     </Button>
+      <div className="details-wrap">
+         <BackButton />
+         <Row gutter={[16, 16]}>
+            <Col span={16}>
+               <div className="blog-details">
+                  <h2 className="blog-title">{blog.title}</h2>
+                  <h3 className="blog-description">{blog.description}</h3>
+                  <p className="blog-content">{blog.content}</p>
+               </div>
+            </Col>
+            <Col span={6}>
+               <div className="metadata-wrap">
+                  {blog && blog.user && blog.user.username && (
+                     <div>
+                        <div className="user-wrap">
+                           <div className="user-details">
+                              <Avatar style={{ color: "#f56a00", backgroundColor: "#fde3cf" }} size="large">
+                                 {blog.user.username[0].toUpperCase()}
+                              </Avatar>
+                              <div style={{ marginLeft: "10px" }}>
+                                 <h5 className="username">{blog.user.username.charAt(0).toUpperCase() + blog.user.username.slice(1)}</h5>
+                                 <p style={{ marginBottom: "0px" }}>{blog.user.email}</p>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  )}
+                  <div className="gapper">
+                     <label className="label">Created at: </label> <Moment format="DD MMM YYYY">{blog.createdAt}</Moment>
                   </div>
-               )))}
 
-         <h2>{blog.title}</h2>
-         <h3>{blog.description}</h3>
-         <p>{blog.content}</p>
-         <p>{blog.user && blog.user.username}</p>
+                  <div className="gapper">
+                     <label className="label">Last modified at: </label> <Moment format="DD MMM YYYY">{blog.modified}</Moment>
+                  </div>
+                  <div className="gapper">
+                     <label className="label">Actions: </label>
+                     {role &&
+                        (role.name === "ADMIN" ||
+                           (role.name === "SUPER_ADMIN" && (
+                              <div className="sequential-buttons">
+                                 <Button type="success" icon={<EditOutlined />} onClick={onEditClick}>
+                                    Edit
+                                 </Button>
+                                 <Button type="dashed" danger icon={<HistoryOutlined />} onClick={onHistoryClick}>
+                                    History
+                                 </Button>
+                                 <Button type="danger" icon={<DeleteOutlined />} onClick={onDeleteClick}>
+                                    Delete
+                                 </Button>
+                              </div>
+                           )))}
+                  </div>
+               </div>
+            </Col>
+         </Row>
       </div>
    );
 };

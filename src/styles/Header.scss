@@ -2,17 +2,12 @@
 .header-wrap {
    height: 70px;
    color: white;
-   background: rgb(255, 255, 255);
+   background: white;
    display: flex;
    justify-content: space-between;
    align-items: center;
    padding: 25px;
-   border: 1px solid #eee;
-   .inner-wrap {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-   }
+
    h3 {
       margin: 0;
       font-family: "Press Start 2P", cursive;
@@ -21,8 +16,11 @@
    a {
       color: #333;
       margin-left: 10px;
+      padding-bottom: 5px;
       &.active {
-         color: rgba(0, 118, 104, 0.611);
+         color: #ce49bf;
+         font-weight: bold;
+         border-bottom: 1px solid #ce49bf;
       }
       &.unselected {
          color: white;
@@ -31,5 +29,7 @@
    .logo {
       border-right: 1px solid #333;
       padding-right: 20px;
+      cursor: pointer;
+      color: #ce49bf;
    }
 }

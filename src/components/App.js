@@ -1,5 +1,5 @@
 import "../styles/App.scss";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import GuardedRoute from "../utils/GuardedRoute";
 import Home from "./Home";
 import Login from "./Auth/Login";
@@ -11,8 +11,32 @@ import BlogDetails from "./Blog/BlogDetails";
 import Approvals from "./Blog/Admin/Approvals";
 import EditBlog from "./Blog/Admin/EditBlog";
 import BlogHistory from "./Blog/Admin/BlogHistory";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getMyDetails } from "../services/AuthService";
+import { setUserDetails, setUserRole } from "../redux/userSlice";
 
 function App() {
+   const dispatch = useDispatch();
+   const navigate = useNavigate();
+
+   useEffect(() => {
+      getMyDetails()
+         .then((details) => {
+            let highestRole = { id: Number.MAX_SAFE_INTEGER, name: "" };
+            details.roles.forEach((role) => {
+               if (role.id < highestRole.id) {
+                  highestRole = role;
+               }
+            });
+            dispatch(setUserRole(highestRole));
+            dispatch(setUserDetails(details));
+         })
+         .catch((_) => {
+            localStorage.removeItem("jwt-token");
+            navigate("/auth/login");
+         });
+   }, [dispatch]);
    return (
       <div className="App">
          <Header />

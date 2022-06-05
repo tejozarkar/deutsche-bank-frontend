@@ -1,3 +1,4 @@
+import { message } from "antd";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getSecurityQuestion, login } from "../../services/AuthService";
@@ -17,18 +18,37 @@ const Login = () => {
 
    const getQuestion = async ({ username }) => {
       setUsername(username);
-      const { question } = await getSecurityQuestion(username);
-      setSecurityQuestion(question);
-      setCurrentStep(2);
+      getSecurityQuestion(username)
+         .then(({ question }) => {
+            if (question) {
+               setSecurityQuestion(question);
+               setCurrentStep(2);
+            } else {
+               message.error("User not found");
+            }
+         })
+         .catch(() => {
+            message.error("Something went wrong");
+         });
    };
 
    const onLogin = async ({ securityAnswer, password }) => {
-      const { token } = await login({ username, securityAnswer, password });
-      localStorage.setItem("jwt-token", token);
-      navigate("/");
+      login({ username, securityAnswer, password })
+         .then(({ token }) => {
+            if (token) {
+               localStorage.setItem("jwt-token", token);
+               navigate("/");
+               navigate(0);
+            } else {
+               message.error("Security Answer is wrong!");
+            }
+         })
+         .catch(() => {
+            message.error("Authentication failure");
+         });
    };
 
-   return <div className="auth-wrap">{currentStep === 1 ? <LoginStep1 onFormSubmit={getQuestion} /> : <LoginStep2 username={username} question={securityQuestion} onFormSubmit={onLogin} />}</div>;
+   return <div className="background-wrap">{currentStep === 1 ? <LoginStep1 onFormSubmit={getQuestion} /> : <LoginStep2 username={username} question={securityQuestion} onFormSubmit={onLogin} />}</div>;
 };
 
 export default Login;

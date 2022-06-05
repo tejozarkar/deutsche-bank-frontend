@@ -7,13 +7,13 @@ const LoginStep2 = ({ username, question, onFormSubmit }) => {
    return (
       <Form form={form} layout="vertical" onFinish={onFormSubmit} initialValues={{ requiredMarkValue: "Required", username: username, question: question }}>
          <Form.Item label="Username" name="username">
-            <Input disabled />
+            <Input readonly />
          </Form.Item>
          <Form.Item label="Security Question" name="question">
-            <Input disabled />
+            <Input readOnly />
          </Form.Item>
          <Form.Item label="Security Answer" name="securityAnswer">
-            <Input required placeholder="Enter Answer" />
+            <Input focus="start" required placeholder="Enter Answer" />
          </Form.Item>
          <Form.Item label="Password" name="password">
             <Input required placeholder="Enter password" type="password" />

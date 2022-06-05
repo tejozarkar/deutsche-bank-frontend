@@ -1,7 +1,9 @@
+import { EditOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { edit, getBlog } from "../../../services/BlogService";
+import BackButton from "../../BackButton";
 
 const EditBlog = () => {
    const [form] = Form.useForm();
@@ -35,32 +37,35 @@ const EditBlog = () => {
 
    return (
       <>
-         {!loading && (
-            <Form form={form} layout="vertical" onFinish={onFormSubmit} initialValues={initialValues}>
-               <Form.Item label="Title" name="title" required>
-                  <Input placeholder="Enter title" />
-               </Form.Item>
-               <Form.Item label="Description" name="description" required>
-                  <Input placeholder="Enter description" />
-               </Form.Item>
-               <Form.Item
-                  name="content"
-                  label="Intro"
-                  rules={[
-                     {
-                        required: true,
-                        message: "Please input Intro",
-                     },
-                  ]}>
-                  <Input.TextArea showCount rows={10} />
-               </Form.Item>
-               <Form.Item>
-                  <Button type="primary" htmlType="submit">
-                     Submit
-                  </Button>
-               </Form.Item>
-            </Form>
-         )}
+         <BackButton />
+         <div className="background-wrap">
+            {!loading && (
+               <Form form={form} layout="vertical" onFinish={onFormSubmit} initialValues={initialValues}>
+                  <Form.Item label="Title" name="title" required>
+                     <Input placeholder="Enter title" />
+                  </Form.Item>
+                  <Form.Item label="Description" name="description" required>
+                     <Input placeholder="Enter description" />
+                  </Form.Item>
+                  <Form.Item
+                     name="content"
+                     label="Intro"
+                     rules={[
+                        {
+                           required: true,
+                           message: "Please input Intro",
+                        },
+                     ]}>
+                     <Input.TextArea showCount rows={10} />
+                  </Form.Item>
+                  <Form.Item>
+                     <Button type="primary" htmlType="submit" icon={<EditOutlined />}>
+                        Edit
+                     </Button>
+                  </Form.Item>
+               </Form>
+            )}
+         </div>
       </>
    );
 };

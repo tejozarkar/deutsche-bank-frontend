@@ -22,3 +22,34 @@ code {
       margin: 0;
    }
 }
+
+.inner-wrap {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.label {
+   color: #827397;
+}
+
+.gapper {
+   margin-top: 10px;
+}
+
+.sequential-buttons {
+   display: flex;
+   padding: 10px;
+   padding-left: 0px;
+   button {
+      margin-right: 10px;
+   }
+}
+
+.background-wrap {
+   background: white;
+   padding: 20px;
+   width: 60%;
+   margin: auto;
+   border-radius: 10px;
+}

@@ -3,6 +3,7 @@ import CollapsePanel from "antd/lib/collapse/CollapsePanel";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getBlogHistory } from "../../../services/BlogService";
+import BackButton from "../../BackButton";
 
 const BlogHistory = () => {
    const { id } = useParams();
@@ -15,6 +16,7 @@ const BlogHistory = () => {
    }, [id]);
    return (
       <div>
+         <BackButton />
          {history.length > 0 && (
             <Collapse defaultActiveKey={["0"]}>
                {history.length &&

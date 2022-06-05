@@ -1,5 +1,6 @@
 import React from "react";
 import { Form, Input, Button } from "antd";
+import { ArrowRightOutlined } from "@ant-design/icons";
 
 const LoginStep1 = ({ onFormSubmit }) => {
    const [form] = Form.useForm();
@@ -10,8 +11,8 @@ const LoginStep1 = ({ onFormSubmit }) => {
             <Input placeholder="Enter username" />
          </Form.Item>
          <Form.Item>
-            <Button type="primary" htmlType="submit">
-               Submit
+            <Button icon={<ArrowRightOutlined />} type="primary" htmlType="submit">
+               Next
             </Button>
          </Form.Item>
       </Form>

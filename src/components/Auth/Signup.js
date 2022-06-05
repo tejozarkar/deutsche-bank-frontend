@@ -17,125 +17,127 @@ const Signup = () => {
    };
 
    return (
-      <Form form={form} layout="vertical" onFinish={onFormSubmit} initialValues={{ requiredMarkValue: "Required" }}>
-         <Form.Item
-            name="username"
-            label="Username"
-            tooltip="What do you want others to call you?"
-            rules={[
-               {
-                  required: true,
-                  message: "Please input your username!",
-               },
-            ]}>
-            <Input />
-         </Form.Item>
-
-         <Form.Item
-            name="password"
-            label="Password"
-            rules={[
-               {
-                  required: true,
-                  message: "Please input your password!",
-               },
-            ]}
-            hasFeedback>
-            <Input.Password />
-         </Form.Item>
-
-         <Form.Item
-            name="confirm"
-            label="Confirm Password"
-            dependencies={["password"]}
-            hasFeedback
-            rules={[
-               {
-                  required: true,
-                  message: "Please confirm your password!",
-               },
-               ({ getFieldValue }) => ({
-                  validator(_, value) {
-                     if (!value || getFieldValue("password") === value) {
-                        return Promise.resolve();
-                     }
-
-                     return Promise.reject(new Error("The two passwords that you entered do not match!"));
+      <div className="background-wrap">
+         <Form form={form} layout="vertical" onFinish={onFormSubmit} initialValues={{ requiredMarkValue: "Required" }}>
+            <Form.Item
+               name="username"
+               label="Username"
+               tooltip="What do you want others to call you?"
+               rules={[
+                  {
+                     required: true,
+                     message: "Please input your username!",
                   },
-               }),
-            ]}>
-            <Input.Password />
-         </Form.Item>
+               ]}>
+               <Input />
+            </Form.Item>
 
-         <Form.Item
-            name="email"
-            label="E-mail"
-            rules={[
-               {
-                  type: "email",
-                  message: "The input is not valid E-mail!",
-               },
-               {
-                  required: true,
-                  message: "Please input your E-mail!",
-               },
-            ]}>
-            <Input />
-         </Form.Item>
+            <Form.Item
+               name="password"
+               label="Password"
+               rules={[
+                  {
+                     required: true,
+                     message: "Please input your password!",
+                  },
+               ]}
+               hasFeedback>
+               <Input.Password />
+            </Form.Item>
 
-         <Form.Item
-            name="phone"
-            label="Phone Number"
-            rules={[
-               {
-                  required: true,
-                  message: "Please input your phone number!",
-               },
-            ]}>
-            <Input
-               style={{
-                  width: "100%",
-               }}
-            />
-         </Form.Item>
+            <Form.Item
+               name="confirm"
+               label="Confirm Password"
+               dependencies={["password"]}
+               hasFeedback
+               rules={[
+                  {
+                     required: true,
+                     message: "Please confirm your password!",
+                  },
+                  ({ getFieldValue }) => ({
+                     validator(_, value) {
+                        if (!value || getFieldValue("password") === value) {
+                           return Promise.resolve();
+                        }
 
-         <Form.Item
-            name="securityQuestion"
-            label="Security Question"
-            rules={[
-               {
-                  required: true,
-                  message: "Please select security question!",
-               },
-            ]}>
-            <Select placeholder="select security question">
-               {securityQuestions.map((question) => (
-                  <Option key={question} value={question}>
-                     {question}
-                  </Option>
-               ))}
-            </Select>
-         </Form.Item>
+                        return Promise.reject(new Error("The two passwords that you entered do not match!"));
+                     },
+                  }),
+               ]}>
+               <Input.Password />
+            </Form.Item>
 
-         <Form.Item
-            name="securityAnswer"
-            label="Security Answer"
-            tooltip="Remember this answer, it will be asked to you while logging in?"
-            rules={[
-               {
-                  required: true,
-                  message: "Please input security answer!",
-               },
-            ]}>
-            <Input />
-         </Form.Item>
+            <Form.Item
+               name="email"
+               label="E-mail"
+               rules={[
+                  {
+                     type: "email",
+                     message: "The input is not valid E-mail!",
+                  },
+                  {
+                     required: true,
+                     message: "Please input your E-mail!",
+                  },
+               ]}>
+               <Input />
+            </Form.Item>
 
-         <Form.Item>
-            <Button type="primary" htmlType="submit">
-               Register
-            </Button>
-         </Form.Item>
-      </Form>
+            <Form.Item
+               name="Name"
+               label="Name"
+               rules={[
+                  {
+                     required: true,
+                     message: "Please input your name!",
+                  },
+               ]}>
+               <Input
+                  style={{
+                     width: "100%",
+                  }}
+               />
+            </Form.Item>
+
+            <Form.Item
+               name="securityQuestion"
+               label="Security Question"
+               rules={[
+                  {
+                     required: true,
+                     message: "Please select security question!",
+                  },
+               ]}>
+               <Select placeholder="select security question">
+                  {securityQuestions.map((question) => (
+                     <Option key={question} value={question}>
+                        {question}
+                     </Option>
+                  ))}
+               </Select>
+            </Form.Item>
+
+            <Form.Item
+               name="securityAnswer"
+               label="Security Answer"
+               tooltip="Remember this answer, it will be asked to you while logging in?"
+               rules={[
+                  {
+                     required: true,
+                     message: "Please input security answer!",
+                  },
+               ]}>
+               <Input />
+            </Form.Item>
+
+            <Form.Item>
+               <Button type="primary" htmlType="submit">
+                  Register
+               </Button>
+            </Form.Item>
+         </Form>
+      </div>
    );
 };
 

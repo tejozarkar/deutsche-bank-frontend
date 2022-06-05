@@ -1,43 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { getBlogs } from "../services/BlogService";
 import BlogList from "./Blog/BlogList";
-import { useDispatch } from "react-redux";
-import { getMyDetails } from "../services/AuthService";
-import { setUserDetails, setUserRole } from "../redux/userSlice";
+import Filters from "./Filters";
 
 const Home = () => {
-   const dispatch = useDispatch();
-
-   useEffect(() => {
-      getMyDetails()
-         .then((details) => {
-            let highestRole = { id: Number.MAX_SAFE_INTEGER, name: "" };
-            details.roles.forEach((role) => {
-               if (role.id < highestRole.id) {
-                  highestRole = role;
-               }
-            });
-            dispatch(setUserRole(highestRole));
-            dispatch(setUserDetails(details));
-         })
-         .catch((_) => {
-            localStorage.removeItem("jwt-token");
-         });
-   }, [dispatch]);
-
    const [blogs, setBlogs] = useState([]);
+   const [filteredBlogs, setFilteredBlogs] = useState([]);
    const [loading, setLoading] = useState(true);
+   const [sortByAuthor, setSortByAuthor] = useState(false);
+   const [sortByDate, setSortByDate] = useState(false);
 
    useEffect(() => {
       getBlogs().then((blogs) => {
          setBlogs(blogs);
+         setFilteredBlogs(blogs);
          setLoading(false);
       });
    }, []);
 
    return (
       <div style={{ height: "100%" }}>
-         <BlogList blogs={blogs} loading={loading} />
+         <Filters blogs={blogs} setFilteredBlogs={setFilteredBlogs} setSortByAuthor={setSortByAuthor} setSortByDate={setSortByDate} />
+         <BlogList blogs={filteredBlogs} loading={loading} sortByAuthor={sortByAuthor} sortByDate={sortByDate} hideStatus={true} />
       </div>
    );
 };
