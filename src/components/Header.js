@@ -120,7 +120,7 @@ const Header = () => {
          </div>
          {role && role.name && (
             <div className="inner-wrap">
-               {role.name === "USER" && <Tag color="magenta">User</Tag>}
+               {role.name === "USER" && <Tag color="magenta">Reader</Tag>}
                {role.name === "ADMIN" && <Tag color="red">Admin</Tag>}
                {role.name === "SUPER_ADMIN" && <Tag color="cyan">Super Admin</Tag>}
                <UserOutlined /> <Button onClick={onLogout}>Logout</Button>
